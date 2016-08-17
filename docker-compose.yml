@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  zookeeper:
+    image: confluent/zookeeper
+    environment:
+      zk_id: "1"
+
+  kafka:
+    image: confluent/kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      JMX_PORT: "9999"
+
+  # Monitoring kafka queue
+  kafka-manager:
+    image: sheepkiller/kafka-manager
+    ports:
+      - "9000:9000"
+    depends_on:
+      - kafka
+      - zookeeper
+    environment:
+      ZK_HOSTS: zookeeper:2181
+
+  # your publisher/subscriber container goes here

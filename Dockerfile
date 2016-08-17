@@ -10,6 +10,6 @@ ENV CPLUS_INCLUDE_PATH /usr/local/include
 ENV LIBRARY_PATH /usr/local/lib
 ENV LD_LIBRARY_PATH /usr/local/lib
 
-RUN pip install confluent_kafka==0.9.1.2
+RUN pip install confluent-kafka==0.9.1.2
 
 WORKDIR /
